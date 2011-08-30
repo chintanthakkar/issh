@@ -5,17 +5,17 @@
         <meta name="description" content="Angry? Frustrated? Slap someone!" />
         <meta name="keywords" content="Slap. Angry. Frustrated" />
         <meta name="robots" content="index, follow" />
-        <title>{% block title %}I slap you so hard!{% endblock %}</title>
-        {% block stylesheets %}
-        <link rel="stylesheet" type="text/css" href="{{asset('/css/style.css')}}" media="screen" />
-        {% endblock %}
+        <title>
+            <?php $view['slots']->output('title', 'I slap you so hard!') ?>
+        </title>
+        <link rel="stylesheet" type="text/css" href="<?php echo $view['assets']->getUrl('css/style.css') ?>" media="screen" />
         <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>
         <div id="header-wrap">
             <div id="header-container">
                 <div id="center-logo">
-                    <img src="{{asset('images/center-logo.png')}}" width="120" height="120" alt="">
+                    <img src="<?php echo $view['assets']->getUrl('images/center-logo.png') ?>" width="120" height="120" alt="">
                 </div>
             </div>
         </div>
@@ -24,17 +24,17 @@
                 <div class="colleft">
                     <div class="col1">
                         <!-- Main start -->
-                        {% block body %}{% endblock %}
+                        <?php $view['slots']->output('_content') ?>
                         <!-- Main end -->
                     </div>
                     <div class="col2">
                         <!-- Left start -->
-                        {% block LeftCol %}<h2>LEFT COL</h2>{% endblock %}
+                        <?php $view['slots']->output('LeftCol', '<h2>LEFT COL</h2>') ?>
                         <!-- Left end -->
                     </div>
                     <div class="col3">
                         <!-- Right start -->
-                        {% block RightCol %}<h2>RIGHT COL</h2>{% endblock %}
+                        <?php $view['slots']->output('RightCol', '<h2>RIGHT COL</h2>') ?>
                         <!-- Right end -->
                     </div>
                 </div>
