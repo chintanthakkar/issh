@@ -1,3 +1,0 @@
-IsshFrontendBundle_homepage:
-    pattern:  /
-    defaults: { _controller: IsshFrontendBundle:Home:index }

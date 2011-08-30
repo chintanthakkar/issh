@@ -1,6 +1,6 @@
 <?php
 
-namespace Issh\FrontendBundle\Tests\Controller;
+namespace Issh\MainBundle\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 

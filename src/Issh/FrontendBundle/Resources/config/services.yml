@@ -1,7 +1,0 @@
-parameters:
-#    issh_frontend.example.class: Issh\FrontendBundle\Example
-
-services:
-#    issh_frontend.example:
-#        class: %issh_frontend.example.class%
-#        arguments: [@service_id, "plain_value", %parameter%]

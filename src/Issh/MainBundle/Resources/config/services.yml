@@ -1,0 +1,7 @@
+parameters:
+#    issh_main.example.class: Issh\MainBundle\Example
+
+services:
+#    issh_main.example:
+#        class: %issh_main.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]
