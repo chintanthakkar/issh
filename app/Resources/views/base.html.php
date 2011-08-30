@@ -9,7 +9,7 @@
             <?php $view['slots']->output('title', 'I slap you so hard!') ?>
         </title>
         <link rel="stylesheet" type="text/css" href="<?php echo $view['assets']->getUrl('css/style.css') ?>" media="screen" />
-        <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" />
+        <link rel="shortcut icon" href="<?php echo $view['assets']->getUrl('favico.ico') ?>" />
     </head>
     <body>
         <div id="header-wrap">
