@@ -1,0 +1,21 @@
+Issh\MainBundle\Entity\IsshComment:
+  type: entity
+  table: null
+  fields:
+    id:
+      type: integer
+      id: true
+      generator:
+        strategy: AUTO
+    postId:
+      type: integer
+    text:
+      type: text
+    categorySlug:
+      type: string
+      length: 255
+    created:
+      type: datetime
+    userId:
+      type: integer      
+  lifecycleCallbacks: {  }

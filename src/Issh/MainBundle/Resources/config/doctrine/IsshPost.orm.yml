@@ -1,0 +1,19 @@
+Issh\MainBundle\Entity\IsshPost:
+  type: entity
+  table: null
+  fields:
+    id:
+      type: integer
+      id: true
+      generator:
+        strategy: AUTO
+    categorySlug:
+      type: string
+      length: 255       
+    text:
+      type: text
+    userId:
+      type: integer
+    created:
+      type: datetime
+  lifecycleCallbacks: {  }

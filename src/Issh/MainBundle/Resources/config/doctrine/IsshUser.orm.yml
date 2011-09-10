@@ -1,0 +1,27 @@
+Issh\MainBundle\Entity\IsshUser:
+  type: entity
+  table: null
+  fields:
+    id:
+      type: integer
+      id: true
+      generator:
+        strategy: AUTO
+    firstName:
+      type: string
+      length: 255
+    lastName:
+      type: string
+      length: 255
+    userName:
+      type: string
+      length: 255
+    password:
+      type: string
+      length: 255
+    salt:
+      type: string
+      length: 255
+    created:
+      type: datetime
+  lifecycleCallbacks: {  }
