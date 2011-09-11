@@ -30,15 +30,35 @@ class IsshComment
     private $text;
 
     /**
-     * @var integer $categorySlug
-     */
-    private $categorySlug;
-
-    /**
      * @var datetime $created
      */
     private $created;
 
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    
+     /**
+     * @ORM\ManyToOne(targetEntity="isshPost", inversedBy="isshComment")
+     * @ORM\JoinColumn(name="postId", referencedColumnName="id")
+     */
+    protected $isshPost;
+
+     /**
+     * @ORM\OneToMany(targetEntity="isshStinger", mappedBy="isshComment")
+     * @ORM\OneToMany(targetEntity="isshSlaptastic", mappedBy="isshComment")
+     */
+    protected $isshStinger;
+    protected $isshSlaptastic;
+    
+    public function __construct()
+    {
+        $this->isshStinger = new ArrayCollection();
+        $this->isshSlaptastic = new ArrayCollection();
+    }
+    
 
     /**
      * Get id
@@ -128,25 +148,5 @@ class IsshComment
     public function getUserId()
     {
         return $this->userId;
-    }
-
-    /**
-     * Set categorySlug
-     *
-     * @param string $categorySlug
-     */
-    public function setCategorySlug($categorySlug)
-    {
-        $this->categorySlug = $categorySlug;
-    }
-
-    /**
-     * Get categorySlug
-     *
-     * @return string 
-     */
-    public function getCategorySlug()
-    {
-        return $this->categorySlug;
     }
 }

@@ -15,11 +15,6 @@ class IsshPost
     private $id;
 
     /**
-     * @var string $categorySlug
-     */
-    private $categorySlug;
-
-    /**
      * @var text $text
      */
     private $text;
@@ -33,6 +28,12 @@ class IsshPost
      * @var datetime $created
      */
     private $created;
+    
+    
+    /**
+     * @var integer $categoryId
+     */
+    private $categoryId;
 
 
     /**
@@ -40,11 +41,34 @@ class IsshPost
      *
      * @return integer 
      */
+    
+     /**
+     * @ORM\ManyToOne(targetEntity="isshCategory", inversedBy="isshPost")
+     * @ORM\JoinColumn(name="categoryId", referencedColumnName="id")
+     */
+    protected $isshCategory;
+    
     public function getId()
     {
         return $this->id;
     }
 
+     /**
+     * @ORM\OneToMany(targetEntity="isshComment", mappedBy="isshPost")
+     * @ORM\OneToMany(targetEntity="isshStinger", mappedBy="isshPost")
+     * @ORM\OneToMany(targetEntity="isshSlaptastic", mappedBy="isshPost")
+     */
+    protected $isshComment;
+    protected $isshStinger;
+    protected $isshSlaptastic;
+    
+    public function __construct()
+    {
+        $this->isshComment = new ArrayCollection();
+        $this->isshStinger = new ArrayCollection();
+        $this->isshSlaptastic = new ArrayCollection();
+    }
+    
     /**
      * Set text
      *
@@ -108,22 +132,22 @@ class IsshPost
     }
 
     /**
-     * Set categorySlug
+     * Set categoryId
      *
-     * @param string $categorySlug
+     * @param integer $categoryId
      */
-    public function setCategorySlug($categorySlug)
+    public function setCategoryId($categoryId)
     {
-        $this->categorySlug = $categorySlug;
+        $this->categoryId = $categoryId;
     }
 
     /**
-     * Get categorySlug
+     * Get categoryId
      *
-     * @return string 
+     * @return integer 
      */
-    public function getCategorySlug()
+    public function getCategoryId()
     {
-        return $this->categorySlug;
+        return $this->categoryId;
     }
 }

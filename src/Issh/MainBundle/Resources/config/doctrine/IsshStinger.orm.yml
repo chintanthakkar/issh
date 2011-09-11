@@ -1,4 +1,4 @@
-Issh\MainBundle\Entity\IsshPost:
+Issh\MainBundle\Entity\IsshStinger:
   type: entity
   table: null
   fields:
@@ -7,11 +7,11 @@ Issh\MainBundle\Entity\IsshPost:
       id: true
       generator:
         strategy: AUTO
-    categoryId:
-      type: integer      
-    text:
-      type: text
     userId:
+      type: integer
+    postId:
+      type: integer
+    commentId:
       type: integer
     created:
       type: datetime

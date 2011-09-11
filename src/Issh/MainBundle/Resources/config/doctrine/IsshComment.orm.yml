@@ -11,9 +11,6 @@ Issh\MainBundle\Entity\IsshComment:
       type: integer
     text:
       type: text
-    categorySlug:
-      type: string
-      length: 255
     created:
       type: datetime
     userId:

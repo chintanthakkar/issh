@@ -24,7 +24,16 @@ class IsshCategory
      */
     private $slug;
 
+    /**
+     * @ORM\OneToMany(targetEntity="isshPost", mappedBy="isshCategory")
+     */
+    protected $isshPost;
 
+    public function __construct()
+    {
+        $this->isshPost = new ArrayCollection();
+    }
+    
     /**
      * Get id
      *
