@@ -11,6 +11,5 @@ class HomeController extends Controller
     public function indexAction()
     {
         return $this->render('IsshMainBundle:Home:index.html.php');
-//        return $this->render('IsshMainBundle:Home:index.html.twig');
     }
 }
