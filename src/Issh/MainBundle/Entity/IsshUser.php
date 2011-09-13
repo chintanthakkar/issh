@@ -2,12 +2,13 @@
 
 namespace Issh\MainBundle\Entity;
 
+//use Symfony\Component\Security\Core\User\UserInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Issh\MainBundle\Entity\IsshUser
  */
-class IsshUser
+class IsshUser //implements UserInterface
 {
     /**
      * @var integer $id
@@ -175,4 +176,22 @@ class IsshUser
     {
         return $this->created;
     }
+    
+//    /*******
+//     * abstract function from userinterface class
+//     */
+//    public function equals(UserInterface $user) {return 0;}
+//
+//    
+//     /*******
+//     * abstract function from userinterface class
+//     */
+//    public function eraseCredentials() {return 0;}
+//
+//    
+//     /*******
+//     * abstract function from userinterface class
+//     */
+//    public function getRoles() {return 0;}
+
 }
