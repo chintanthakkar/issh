@@ -19,9 +19,22 @@ Issh\MainBundle\Entity\IsshUser:
     password:
       type: string
       length: 255
+    email:
+      type: string
+      length: 255
+      nullable: true
     salt:
       type: string
       length: 255
+    token:
+      type: string
+      length: 255
+      nullable: true
+    roles:
+      type: text
+    lastLogin:
+      type: datetime
+      nullable: true
     created:
       type: datetime
   lifecycleCallbacks: {  }

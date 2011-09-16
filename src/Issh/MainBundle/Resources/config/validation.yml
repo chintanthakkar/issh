@@ -1,0 +1,17 @@
+Issh\MainBundle\Entity\IsshUser:
+   properties:
+     firstName:
+       - NotBlank: ~
+     lastName:
+       - NotBlank: ~
+     userName:
+       - NotBlank: ~
+       - MinLength: 4
+     password:
+       - NotBlank: ~
+       - MinLength: 6
+     email:
+       - NotBlank: ~
+       - Email:
+            message: The email "{{ value }}" is not a valid email.
+            checkMX: true

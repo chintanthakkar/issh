@@ -2,48 +2,59 @@
 
 namespace Issh\MainBundle\Entity;
 
-//use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Issh\MainBundle\Entity\IsshUser
  */
-class IsshUser //implements UserInterface
+class IsshUser implements UserInterface
 {
     /**
      * @var integer $id
      */
-    private $id;
+    protected $id;
 
     /**
      * @var string $firstName
      */
-    private $firstName;
+    protected $firstName;
 
     /**
      * @var string $lastName
      */
-    private $lastName;
+    protected $lastName;
 
     /**
      * @var string $userName
      */
-    private $userName;
+    protected $userName;
 
     /**
      * @var string $password
      */
-    private $password;
+    protected $password;
 
     /**
      * @var string $salt
      */
-    private $salt;
+    protected $salt;
 
      /**
      * @var string created
      */
-    private $created;
+    protected $created;
+
+     /**
+     * @var string roles
+     */
+    protected $roles;
+    
+    
+    public function __construct() 
+    { 
+//        $this->roles = new \Doctrine\Common\Collections\ArrayCollection(); 
+    } 
 
     /**
      * Get id
@@ -140,9 +151,12 @@ class IsshUser //implements UserInterface
      *
      * @param string $salt
      */
-    public function setSalt($salt)
+    public function setSalt()
     {
-        $this->salt = $salt;
+        // Create a 256 bit (64 characters) long random salt
+        // Let's add 'something random' and the username
+        // to the salt as well for added security
+        $this->salt = hash('sha256', uniqid(mt_rand(), true) . 'something random' . strtolower($this->userName));
     }
 
     /**
@@ -162,9 +176,9 @@ class IsshUser //implements UserInterface
      *
      * @param datetime $created
      */
-    public function setCreated($created)
-    {
-        $this->created = $created;
+    public function setCreated()
+    {        
+        $this->created = new \DateTime("now");
     }
 
     /**
@@ -177,21 +191,105 @@ class IsshUser //implements UserInterface
         return $this->created;
     }
     
-//    /*******
-//     * abstract function from userinterface class
-//     */
-//    public function equals(UserInterface $user) {return 0;}
-//
-//    
-//     /*******
-//     * abstract function from userinterface class
-//     */
-//    public function eraseCredentials() {return 0;}
-//
-//    
-//     /*******
-//     * abstract function from userinterface class
-//     */
-//    public function getRoles() {return 0;}
+     /**
+     * Set roles
+     * 
+     * @param datetime $roles
+     */
+    public function setRoles($roles)
+    {
+        $this->roles = serialize($roles);
+    }
+    /*******
+     * abstract function from userinterface class
+     */
+    public function equals(UserInterface $user) {return 0;}
 
+    
+     /*******
+     * abstract function from userinterface class
+     */
+    public function eraseCredentials() {return 0;}
+
+    
+     /*******
+     * abstract function from userinterface class
+     */
+    public function getRoles() {return unserialize($this->roles);}
+
+    /**
+     * @var string $email
+     */
+    protected $email;
+
+    /**
+     * @var string $token
+     */
+    protected $token;
+
+    /**
+     * @var datetime $lastLogin
+     */
+    protected $lastLogin;
+
+
+    /**
+     * Set email
+     *
+     * @param string $email
+     */
+    public function setEmail($email)
+    {
+        $this->email = $email;
+    }
+
+    /**
+     * Get email
+     *
+     * @return string 
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    /**
+     * Set token
+     *
+     * @param string $token
+     */
+    public function setToken($token)
+    {
+        $this->token = $token;
+    }
+
+    /**
+     * Get token
+     *
+     * @return string 
+     */
+    public function getToken()
+    {
+        return $this->token;
+    }
+
+    /**
+     * Set lastLogin
+     *
+     * @param datetime $lastLogin
+     */
+    public function setLastLogin($lastLogin)
+    {
+        $this->lastLogin = $lastLogin;
+    }
+
+    /**
+     * Get lastLogin
+     *
+     * @return datetime 
+     */
+    public function getLastLogin()
+    {
+        return $this->lastLogin;
+    }
 }

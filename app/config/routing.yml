@@ -4,11 +4,16 @@ IsshMainBundle:
 login:
     pattern:   /login
     defaults:  { _controller: IsshMainBundle:Security:login }
+register:
+    pattern:   /register
+    defaults:  { _controller: IsshMainBundle:Security:register }    
 login_check:
     pattern:   /login_check
 logout:
     pattern:   /logout
-
+home:
+    pattern:   /
+    defaults:  { _controller: IsshMainBundle:Home:index } 
 # Internal routing configuration to handle ESI
 #_internal:
 #   resource: "@FrameworkBundle/Resources/config/routing/internal.xml"

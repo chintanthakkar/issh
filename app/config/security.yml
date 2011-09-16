@@ -4,17 +4,17 @@ security:
         ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
 
     providers:
-        in_memory:
-            users:
-                user:  { password: userpass, roles: [ 'ROLE_USER' ] }
-                admin: { password: adminpass, roles: [ 'ROLE_ADMIN' ] }
-#        main:
-#            entity: { class: Issh\MainBundle\Entity\IsshUser, property: userName }
-#    encoders:
-#        Issh\MainBundle\Entity\IsshUser: sha512
-
+#        in_memory:
+#            users:
+#                user:  { password: userpass, roles: [ 'ROLE_USER' ] }
+#                admin: { password: adminpass, roles: [ 'ROLE_ADMIN' ] }
+        main:
+            entity: { class: Issh\MainBundle\Entity\IsshUser, property: userName }
     encoders:
-        Symfony\Component\Security\Core\User\User: plaintext
+        Issh\MainBundle\Entity\IsshUser: sha256
+
+#    encoders:
+#        Symfony\Component\Security\Core\User\User: plaintext
  
     firewalls:
         dev:
