@@ -203,7 +203,12 @@ class IsshUser implements UserInterface
     /*******
      * abstract function from userinterface class
      */
-    public function equals(UserInterface $user) {return 0;}
+    public function equals(UserInterface $user) {
+        if ($user->userName !== $this->userName)
+            return false;
+        
+        return true;
+    }
 
     
      /*******
@@ -291,5 +296,10 @@ class IsshUser implements UserInterface
     public function getLastLogin()
     {
         return $this->lastLogin;
+    }
+    
+    public function isUserNameDuplicate()
+    {
+        return;
     }
 }

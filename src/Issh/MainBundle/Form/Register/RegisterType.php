@@ -12,7 +12,12 @@ class RegisterType extends AbstractType
         $builder->add('firstName','text')
                 ->add('lastName','text')
                 ->add('userName','text')
-                ->add('password','password')
+                ->add('password', 'repeated', array (
+                        'type'            => 'password',
+                        'first_name'      => "Password",
+                        'second_name'     => "Re-enter Password",
+                        'invalid_message' => "The passwords don't match!"
+                ))
                 ->add('email','email');
     }
     
