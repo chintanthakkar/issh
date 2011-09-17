@@ -25,13 +25,13 @@ class IsshCategory
     private $slug;
 
     /**
-     * @ORM\OneToMany(targetEntity="isshPost", mappedBy="isshCategory")
+     * @ORM\OneToMany(targetEntity="IsshPost", mappedBy="IsshCategory")
      */
-    protected $isshPost;
+    protected $IsshPost;
 
     public function __construct()
     {
-        $this->isshPost = new ArrayCollection();
+        $this->IsshPost = new ArrayCollection();
     }
     
     /**

@@ -13,6 +13,9 @@ Issh\MainBundle\Entity\IsshComment:
       type: text
     created:
       type: datetime
+    updated:
+      type: datetime  
     userId:
       type: integer      
-  lifecycleCallbacks: {  }
+  lifecycleCallbacks: 
+    preUpdate: [setUpdated]

@@ -25,6 +25,12 @@ class RegisterType extends AbstractType
     {
         return 'register';
     }
-    
+
+    public function getDefaultOptions(array $options)
+    {
+        return array(
+            'data_class' => 'Issh\MainBundle\Entity\IsshUser'
+        );
+    }
 }
 ?>

@@ -12,51 +12,53 @@ class IsshComment
     /**
      * @var integer $id
      */
-    private $id;
+    protected $id;
 
     /**
      * @var integer $postId
      */
-    private $postId;
+    protected $postId;
 
     /**
      * @var integer $userId
      */
-    private $userId;
+    protected $userId;
     
     /**
      * @var text $text
      */
-    private $text;
+    protected $text;
 
     /**
      * @var datetime $created
      */
-    private $created;
-
+    protected $created;
+    
     /**
-     * Get id
-     *
-     * @return integer 
+     * @var datetime $updated
      */
+    protected $updated;
     
      /**
-     * @ORM\ManyToOne(targetEntity="isshPost", inversedBy="isshComment")
+     * @ORM\ManyToOne(targetEntity="IsshPost", inversedBy="IsshComment")
      * @ORM\JoinColumn(name="postId", referencedColumnName="id")
      */
-    protected $isshPost;
+    protected $IsshPost;
 
      /**
-     * @ORM\OneToMany(targetEntity="isshStinger", mappedBy="isshComment")
-     * @ORM\OneToMany(targetEntity="isshSlaptastic", mappedBy="isshComment")
+     * @ORM\OneToMany(targetEntity="IsshStinger", mappedBy="IsshComment")
      */
-    protected $isshStinger;
-    protected $isshSlaptastic;
+    
+    protected $IsshStinger;
+     /**
+     * @ORM\OneToMany(targetEntity="IsshSlaptastic", mappedBy="IsshComment")
+     */
+    protected $IsshSlaptastic;
     
     public function __construct()
     {
-        $this->isshStinger = new ArrayCollection();
-        $this->isshSlaptastic = new ArrayCollection();
+        $this->IsshStinger = new ArrayCollection();
+        $this->IsshSlaptastic = new ArrayCollection();
     }
     
 
@@ -148,5 +150,25 @@ class IsshComment
     public function getUserId()
     {
         return $this->userId;
+    }
+
+    /**
+     * Set updated
+     *
+     * @param datetime $updated
+     */
+    public function setUpdated()
+    {
+        $this->updated = new \DateTime();
+    }
+
+    /**
+     * Get updated
+     *
+     * @return datetime 
+     */
+    public function getUpdated()
+    {
+        return $this->updated;
     }
 }

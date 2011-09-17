@@ -15,4 +15,7 @@ Issh\MainBundle\Entity\IsshPost:
       type: integer
     created:
       type: datetime
-  lifecycleCallbacks: {  }
+    updated:
+      type: datetime      
+  lifecycleCallbacks: 
+    preUpdate: [setUpdated]

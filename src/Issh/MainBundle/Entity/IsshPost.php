@@ -12,61 +12,76 @@ class IsshPost
     /**
      * @var integer $id
      */
-    private $id;
+    protected $id;
 
     /**
      * @var text $text
      */
-    private $text;
+    protected $text;
 
     /**
      * @var integer $userId
      */
-    private $userId;
+    protected $userId;
 
     /**
      * @var datetime $created
      */
-    private $created;
-    
+    protected $created;
+
+    /**
+     * @var datetime $updated
+     */
+    protected $updated;    
     
     /**
      * @var integer $categoryId
      */
-    private $categoryId;
+    protected $categoryId;
 
-
+     /**
+     * @ORM\ManyToOne(targetEntity="IsshCategory", inversedBy="IsshPost")
+     * @ORM\JoinColumn(name="categoryId", referencedColumnName="id")
+     */
+    protected $IsshCategory;
+        
+    /**
+     * @ORM\ManyToOne(targetEntity="IsshUser", inversedBy="IsshPost")
+     * @ORM\JoinColumn(name="userId", referencedColumnName="id")
+     *
+     * @var IsshUser $IsshUser
+     */
+    protected $IsshUser;
+ 
+    
     /**
      * Get id
      *
      * @return integer 
-     */
-    
-     /**
-     * @ORM\ManyToOne(targetEntity="isshCategory", inversedBy="isshPost")
-     * @ORM\JoinColumn(name="categoryId", referencedColumnName="id")
-     */
-    protected $isshCategory;
-    
+     */    
     public function getId()
     {
         return $this->id;
     }
 
      /**
-     * @ORM\OneToMany(targetEntity="isshComment", mappedBy="isshPost")
-     * @ORM\OneToMany(targetEntity="isshStinger", mappedBy="isshPost")
-     * @ORM\OneToMany(targetEntity="isshSlaptastic", mappedBy="isshPost")
+     * @ORM\OneToMany(targetEntity="IsshComment", mappedBy="IsshPost")
      */
-    protected $isshComment;
-    protected $isshStinger;
-    protected $isshSlaptastic;
+    protected $IsshComment;
+     /**
+     * @ORM\OneToMany(targetEntity="IsshStinger", mappedBy="IsshPost")
+     */
+    protected $IsshStinger;
+     /**
+     * @ORM\OneToMany(targetEntity="IsshSlaptastic", mappedBy="IsshPost")
+     */
+    protected $IsshSlaptastic;
     
     public function __construct()
     {
-        $this->isshComment = new ArrayCollection();
-        $this->isshStinger = new ArrayCollection();
-        $this->isshSlaptastic = new ArrayCollection();
+        $this->IsshComment = new ArrayCollection();
+        $this->IsshStinger = new ArrayCollection();
+        $this->IsshSlaptastic = new ArrayCollection();
     }
     
     /**
@@ -149,5 +164,25 @@ class IsshPost
     public function getCategoryId()
     {
         return $this->categoryId;
+    }
+
+    /**
+     * Set updated
+     *
+     * @param datetime $updated
+     */
+    public function setUpdated()
+    {
+        $this->updated = new \DateTime();
+    }
+
+    /**
+     * Get updated
+     *
+     * @return datetime 
+     */
+    public function getUpdated()
+    {
+        return $this->updated;
     }
 }

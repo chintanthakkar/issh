@@ -35,16 +35,16 @@ class IsshSlaptastic
     private $created;
 
      /**
-     * @ORM\ManyToOne(targetEntity="isshPost", inversedBy="isshSlaptastic")
+     * @ORM\ManyToOne(targetEntity="IsshPost", inversedBy="IsshSlaptastic")
      * @ORM\JoinColumn(name="postId", referencedColumnName="id")
      */
-    protected $isshPost;
+    protected $IsshPost;
     
      /**
-     * @ORM\ManyToOne(targetEntity="isshComment", inversedBy="isshSlaptastic")
+     * @ORM\ManyToOne(targetEntity="IsshComment", inversedBy="IsshSlaptastic")
      * @ORM\JoinColumn(name="commentId", referencedColumnName="id")
      */
-    protected $isshComment;
+    protected $IsshComment;
     
     /**
      * Get id

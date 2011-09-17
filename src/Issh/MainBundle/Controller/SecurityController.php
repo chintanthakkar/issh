@@ -71,10 +71,7 @@ class SecurityController extends Controller
 
                 return $this->redirect($this->generateUrl('home'));
             }
-            else 
-            {
 
-            }
         }
         
         return $this->render('IsshMainBundle:Security:register.html.php', array(

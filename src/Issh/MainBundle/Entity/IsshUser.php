@@ -49,10 +49,18 @@ class IsshUser implements UserInterface
      * @var string roles
      */
     protected $roles;
-    
+
+     /**
+     * @ORM\OneToMany(targetEntity="IsshPost", mappedBy="IsshUser")
+     * @ORM\OrderBy({"createdAt" = "DESC"})
+     *
+     * @var ArrayCollection $IsshPost
+     */
+    protected $IsshPost;
     
     public function __construct() 
     { 
+        $this->Isshpost = new ArrayCollection();
 //        $this->roles = new \Doctrine\Common\Collections\ArrayCollection(); 
     } 
 
@@ -214,7 +222,10 @@ class IsshUser implements UserInterface
      /*******
      * abstract function from userinterface class
      */
-    public function eraseCredentials() {return 0;}
+    public function eraseCredentials() {
+        $this->password = "";
+        $this->salt = "";
+    }
 
     
      /*******

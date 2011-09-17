@@ -35,16 +35,16 @@ class IsshStinger
     private $created;
 
      /**
-     * @ORM\ManyToOne(targetEntity="isshPost", inversedBy="isshStinger")
+     * @ORM\ManyToOne(targetEntity="IsshPost", inversedBy="IsshStinger")
      * @ORM\JoinColumn(name="postId", referencedColumnName="id")
      */
-    protected $isshPost;
+    protected $IsshPost;
 
      /**
-     * @ORM\ManyToOne(targetEntity="isshComment", inversedBy="isshStinger")
+     * @ORM\ManyToOne(targetEntity="IsshComment", inversedBy="IsshStinger")
      * @ORM\JoinColumn(name="commentId", referencedColumnName="id")
      */
-    protected $isshComment;
+    protected $IsshComment;
     
     /**
      * Get id
