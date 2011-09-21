@@ -20,7 +20,9 @@ class FixtureLoader implements FixtureInterface
         $user->setLastName('Doe');
         $user->setEmail('john@example.com');
         $user->setUserName('john@example.com');
-        $user->setPassword('john@example.com');   
+        $user->setPassword('john@example.com'); 
+        $user->setSalt();
+        $user->setCreated();
         $user->setRoles(array('ROLE_USER'));
  
         $manager->persist($user);
@@ -39,11 +41,9 @@ class FixtureLoader implements FixtureInterface
         for ( $i = 0; $i < 10; ++$i )
         {
             $post = new IsshPost();
-            $post->setIsshCategory($cat);
+            ($i % 2) ? $post->setIsshCategory($cat) : $post->setIsshCategory($cat2);
             $post->setIsshUser($user);
-            $post->setTitle('Lorem Ipsum Dolor Sit Amet ' . $i);
-            $post->setSlug('lorem-ipsum-dolor-sit-amet ' . $i);
-            $post->setContent(
+            $post->setText(
                 'Proin auctor augue enim? Integer adipiscing dolor odio proin? ' .
                 'In placerat arcu, turpis turpis et rhoncus? Et integer nascetur ' .
                 'arcu! Turpis scelerisque tincidunt proin mauris, dignissim duis ' .
@@ -58,9 +58,22 @@ class FixtureLoader implements FixtureInterface
                 'velit. A, et porta, eros pulvinar! Nisi turpis mattis lundium ac ' .
                 'non nunc phasellus penatibus ut magna rhoncus dolor, lundium ultrices.'
             );
- 
-            $post->getTags()->add($tags[rand(0, 1)]);
- 
+            $post->setCreated('2007-12-18 16:35:36');
+            //create 2 comments / post
+            for ($j = 0; $j < 2; $j++)
+            {
+                $comment = new IsshComment();
+                $comment->setIsshUser($user);
+                $comment->setIsshPost($post);
+                $comment->setText(
+                'Proin auctor augue enim? Integer adipiscing dolor odio proin? ' .
+                'In placerat arcu, turpis turpis et rhoncus? Et integer nascetur ' .
+                'arcu! Turpis scelerisque tincidunt proin mauris, dignissim duis ' .
+                'enim, ac sagittis auctor eu, ut penatibus nunc rhoncus magna '
+                );
+                $comment->setCreated('2007-12-18 16:35:36');
+                $manager->persist($comment);
+            }
             $manager->persist($post);
         }
  

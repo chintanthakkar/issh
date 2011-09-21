@@ -9,6 +9,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 /**
  * @ORM\Entity
  * @ORM\Table(name="IsshUser")
+ * @ORM\HasLifecycleCallbacks
  */
 class IsshUser implements UserInterface
 {
@@ -149,17 +150,6 @@ class IsshUser implements UserInterface
         return $this->salt;
     }
     
-
-
-    /**
-     * Set created
-     *
-     * @param datetime $created
-     */
-    public function setCreated()
-    {        
-        $this->created = new \DateTime("now");
-    }
 
     /**
      * Get created
@@ -336,4 +326,15 @@ class IsshUser implements UserInterface
     {
         return $this->IsshPost;
     }
+    
+    /**
+     * Invoked before the entity is updated.
+     *
+     * @ORM\PrePersist
+     */ 
+    public function setCreated()
+    {
+        $this->created = new \DateTime();
+    }
+
 }

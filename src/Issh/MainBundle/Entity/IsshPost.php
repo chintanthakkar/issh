@@ -31,7 +31,7 @@ class IsshPost
     protected $created;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime", nullable=true)
      */
     protected $updated;    
     
@@ -67,16 +67,7 @@ class IsshPost
         $this->IsshStinger = new ArrayCollection();
         $this->IsshSlaptastic = new ArrayCollection();
     }
-    
-    /**
-     * Invoked before the entity is updated.
-     *
-     * @ORM\PreUpdate
-     */   
-    public function preUpdate()
-    {
-        $this->updated = new \DateTime();
-    }
+
 
     /**
      * Get id
@@ -109,33 +100,13 @@ class IsshPost
     }
 
     /**
-     * Set created
+     * Invoked before the entity is updated.
      *
-     * @param datetime $created
-     */
-    public function setCreated($created)
+     * @ORM\PreUpdate
+     */ 
+    public function setUpdated()
     {
-        $this->created = $created;
-    }
-
-    /**
-     * Get created
-     *
-     * @return datetime 
-     */
-    public function getCreated()
-    {
-        return $this->created;
-    }
-
-    /**
-     * Set updated
-     *
-     * @param datetime $updated
-     */
-    public function setUpdated($updated)
-    {
-        $this->updated = $updated;
+        $this->updated = new \DateTime();
     }
 
     /**
@@ -246,5 +217,25 @@ class IsshPost
     public function getIsshSlaptastic()
     {
         return $this->IsshSlaptastic;
+    }
+    
+    /**
+     * Invoked before the entity is updated.
+     *
+     * @ORM\PrePersist
+     */ 
+    public function setCreated()
+    {
+        $this->created = new \DateTime();
+    }
+
+    /**
+     * Get created
+     *
+     * @return datetime 
+     */
+    public function getCreated()
+    {
+        return $this->created;
     }
 }

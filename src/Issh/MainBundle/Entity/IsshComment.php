@@ -30,7 +30,7 @@ class IsshComment
     protected $created;
     
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime", nullable=true)
      */
     protected $updated;
     
@@ -63,16 +63,6 @@ class IsshComment
     }
    
     /**
-     * Invoked before the entity is updated.
-     *
-     * @ORM\PreUpdate
-     */   
-    public function preUpdate()
-    {
-        $this->updated = new \DateTime();
-    }
-
-    /**
      * Get id
      *
      * @return integer 
@@ -102,14 +92,14 @@ class IsshComment
         return $this->text;
     }
 
-    /**
-     * Set created
+   /**
+     * Invoked before the entity is updated.
      *
-     * @param datetime $created
-     */
-    public function setCreated($created)
+     * @ORM\PrePersist
+     */ 
+    public function setCreated()
     {
-        $this->created = $created;
+        $this->created = new \DateTime();
     }
 
     /**
@@ -123,13 +113,13 @@ class IsshComment
     }
 
     /**
-     * Set updated
+     * Invoked before the entity is updated.
      *
-     * @param datetime $updated
-     */
-    public function setUpdated($updated)
+     * @ORM\PreUpdate
+     */ 
+    public function setUpdated()
     {
-        $this->updated = $updated;
+        $this->updated = new \DateTime();
     }
 
     /**
