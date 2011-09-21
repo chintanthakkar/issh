@@ -7,49 +7,69 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
- * Issh\MainBundle\Entity\IsshUser
+ * @ORM\Entity
+ * @ORM\Table(name="IsshUser")
  */
 class IsshUser implements UserInterface
 {
     /**
-     * @var integer $id
+     * @ORM\Id
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
 
     /**
-     * @var string $firstName
+     * @ORM\Column(type="string", length="255")
      */
     protected $firstName;
 
     /**
-     * @var string $lastName
+     * @ORM\Column(type="string", length="255")
      */
     protected $lastName;
 
     /**
-     * @var string $userName
+     * @ORM\Column(type="string", length="255")
      */
     protected $userName;
 
     /**
-     * @var string $password
+     * @ORM\Column(type="string", length="255")
      */
     protected $password;
 
     /**
-     * @var string $salt
+     * @ORM\Column(type="string", length="255")
      */
     protected $salt;
 
-     /**
-     * @var string created
+    /**
+     * @ORM\Column(type="datetime")
      */
     protected $created;
 
-     /**
-     * @var string roles
+    /**
+     * @ORM\Column(type="string", length="255")
      */
     protected $roles;
+    
+    /**
+     * @ORM\Column(type="string", length="255", nullable=true)
+     */
+    protected $email;
+
+    /**
+     * @ORM\Column(type="string", length="255", nullable=true)
+     */
+    protected $token;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    protected $lastLogin;
+
+    
 
      /**
      * @ORM\OneToMany(targetEntity="IsshPost", mappedBy="IsshUser")
@@ -65,55 +85,6 @@ class IsshUser implements UserInterface
 //        $this->roles = new \Doctrine\Common\Collections\ArrayCollection(); 
     } 
 
-    /**
-     * Get id
-     *
-     * @return integer 
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * Set firstName
-     *
-     * @param string $firstName
-     */
-    public function setFirstName($firstName)
-    {
-        $this->firstName = $firstName;
-    }
-
-    /**
-     * Get firstName
-     *
-     * @return string 
-     */
-    public function getFirstName()
-    {
-        return $this->firstName;
-    }
-
-    /**
-     * Set lastName
-     *
-     * @param string $lastName
-     */
-    public function setLastName($lastName)
-    {
-        $this->lastName = $lastName;
-    }
-
-    /**
-     * Get lastName
-     *
-     * @return string 
-     */
-    public function getLastName()
-    {
-        return $this->lastName;
-    }
 
     /**
      * Set userName
@@ -234,21 +205,57 @@ class IsshUser implements UserInterface
      */
     public function getRoles() {return unserialize($this->roles);}
 
-    /**
-     * @var string $email
-     */
-    protected $email;
+
 
     /**
-     * @var string $token
+     * Get id
+     *
+     * @return integer 
      */
-    protected $token;
+    public function getId()
+    {
+        return $this->id;
+    }
 
     /**
-     * @var datetime $lastLogin
+     * Set firstName
+     *
+     * @param string $firstName
      */
-    protected $lastLogin;
+    public function setFirstName($firstName)
+    {
+        $this->firstName = $firstName;
+    }
 
+    /**
+     * Get firstName
+     *
+     * @return string 
+     */
+    public function getFirstName()
+    {
+        return $this->firstName;
+    }
+
+    /**
+     * Set lastName
+     *
+     * @param string $lastName
+     */
+    public function setLastName($lastName)
+    {
+        $this->lastName = $lastName;
+    }
+
+    /**
+     * Get lastName
+     *
+     * @return string 
+     */
+    public function getLastName()
+    {
+        return $this->lastName;
+    }
 
     /**
      * Set email
@@ -309,9 +316,24 @@ class IsshUser implements UserInterface
     {
         return $this->lastLogin;
     }
-    
-    public function isUserNameDuplicate()
+
+    /**
+     * Add IsshPost
+     *
+     * @param Issh\MainBundle\Entity\IsshPost $isshPost
+     */
+    public function addIsshPost(\Issh\MainBundle\Entity\IsshPost $isshPost)
     {
-        return;
+        $this->IsshPost[] = $isshPost;
+    }
+
+    /**
+     * Get IsshPost
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getIsshPost()
+    {
+        return $this->IsshPost;
     }
 }

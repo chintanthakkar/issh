@@ -6,39 +6,35 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
- * Issh\MainBundle\Entity\IsshPost
+ * @ORM\Entity
+ * @ORM\Table(name="IsshPost")
+ * @ORM\HasLifecycleCallbacks
  */
 class IsshPost
 {
     /**
-     * @var integer $id
+     * @ORM\Id
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
 
     /**
-     * @var text $text
+     * @ORM\Column(type="text")
      */
     protected $text;
 
-    /**
-     * @var integer $userId
-     */
-    protected $userId;
 
     /**
-     * @var datetime $created
+     * @ORM\Column(type="datetime")
      */
     protected $created;
 
     /**
-     * @var datetime $updated
+     * @ORM\Column(type="datetime")
      */
     protected $updated;    
     
-    /**
-     * @var integer $categoryId
-     */
-    protected $categoryId;
 
      /**
      * @ORM\ManyToOne(targetEntity="IsshCategory", inversedBy="IsshPost")
@@ -49,21 +45,8 @@ class IsshPost
     /**
      * @ORM\ManyToOne(targetEntity="IsshUser", inversedBy="IsshPost")
      * @ORM\JoinColumn(name="userId", referencedColumnName="id")
-     *
-     * @var IsshUser $IsshUser
      */
     protected $IsshUser;
- 
-    
-    /**
-     * Get id
-     *
-     * @return integer 
-     */    
-    public function getId()
-    {
-        return $this->id;
-    }
 
      /**
      * @ORM\OneToMany(targetEntity="IsshComment", mappedBy="IsshPost")
@@ -86,6 +69,26 @@ class IsshPost
     }
     
     /**
+     * Invoked before the entity is updated.
+     *
+     * @ORM\PreUpdate
+     */   
+    public function preUpdate()
+    {
+        $this->updated = new \DateTime();
+    }
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
      * Set text
      *
      * @param text $text
@@ -104,28 +107,6 @@ class IsshPost
     {
         return $this->text;
     }
-
-    /**
-     * Set userId
-     *
-     * @param integer $userId
-     */
-    public function setUserId($userId)
-    {
-        $this->userId = $userId;
-    }
-
-    /**
-     * Get userId
-     *
-     * @return integer 
-     */
-    public function getUserId()
-    {
-        return $this->userId;
-    }
-
-
 
     /**
      * Set created
@@ -148,33 +129,13 @@ class IsshPost
     }
 
     /**
-     * Set categoryId
-     *
-     * @param integer $categoryId
-     */
-    public function setCategoryId($categoryId)
-    {
-        $this->categoryId = $categoryId;
-    }
-
-    /**
-     * Get categoryId
-     *
-     * @return integer 
-     */
-    public function getCategoryId()
-    {
-        return $this->categoryId;
-    }
-
-    /**
      * Set updated
      *
      * @param datetime $updated
      */
-    public function setUpdated()
+    public function setUpdated($updated)
     {
-        $this->updated = new \DateTime();
+        $this->updated = $updated;
     }
 
     /**
@@ -185,5 +146,105 @@ class IsshPost
     public function getUpdated()
     {
         return $this->updated;
+    }
+
+    /**
+     * Set IsshCategory
+     *
+     * @param Issh\MainBundle\Entity\IsshCategory $isshCategory
+     */
+    public function setIsshCategory(\Issh\MainBundle\Entity\IsshCategory $isshCategory)
+    {
+        $this->IsshCategory = $isshCategory;
+    }
+
+    /**
+     * Get IsshCategory
+     *
+     * @return Issh\MainBundle\Entity\IsshCategory 
+     */
+    public function getIsshCategory()
+    {
+        return $this->IsshCategory;
+    }
+
+    /**
+     * Set IsshUser
+     *
+     * @param Issh\MainBundle\Entity\IsshUser $isshUser
+     */
+    public function setIsshUser(\Issh\MainBundle\Entity\IsshUser $isshUser)
+    {
+        $this->IsshUser = $isshUser;
+    }
+
+    /**
+     * Get IsshUser
+     *
+     * @return Issh\MainBundle\Entity\IsshUser 
+     */
+    public function getIsshUser()
+    {
+        return $this->IsshUser;
+    }
+
+    /**
+     * Add IsshComment
+     *
+     * @param Issh\MainBundle\Entity\IsshComment $isshComment
+     */
+    public function addIsshComment(\Issh\MainBundle\Entity\IsshComment $isshComment)
+    {
+        $this->IsshComment[] = $isshComment;
+    }
+
+    /**
+     * Get IsshComment
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getIsshComment()
+    {
+        return $this->IsshComment;
+    }
+
+    /**
+     * Add IsshStinger
+     *
+     * @param Issh\MainBundle\Entity\IsshStinger $isshStinger
+     */
+    public function addIsshStinger(\Issh\MainBundle\Entity\IsshStinger $isshStinger)
+    {
+        $this->IsshStinger[] = $isshStinger;
+    }
+
+    /**
+     * Get IsshStinger
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getIsshStinger()
+    {
+        return $this->IsshStinger;
+    }
+
+    /**
+     * Add IsshSlaptastic
+     *
+     * @param Issh\MainBundle\Entity\IsshSlaptastic $isshSlaptastic
+     */
+    public function addIsshSlaptastic(\Issh\MainBundle\Entity\IsshSlaptastic $isshSlaptastic)
+    {
+        $this->IsshSlaptastic[] = $isshSlaptastic;
+    }
+
+    /**
+     * Get IsshSlaptastic
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getIsshSlaptastic()
+    {
+        return $this->IsshSlaptastic;
     }
 }

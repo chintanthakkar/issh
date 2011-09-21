@@ -6,22 +6,26 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
- * Issh\MainBundle\Entity\IsshCategory
+ * @ORM\Entity
+ * @ORM\Table(name="IsshCategory")
+ * @ORM\HasLifecycleCallbacks
  */
 class IsshCategory
 {
     /**
-     * @var integer $id
+     * @ORM\Id
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
 
     /**
-     * @var string $name
+     * @ORM\Column(type="string", length="255")
      */
     private $name;
 
-     /**
-     * @var string $slug
+    /**
+     * @ORM\Column(type="string", length="255")
      */
     private $slug;
 
@@ -35,6 +39,7 @@ class IsshCategory
         $this->IsshPost = new ArrayCollection();
     }
     
+
     /**
      * Get id
      *
@@ -83,5 +88,25 @@ class IsshCategory
     public function getSlug()
     {
         return $this->slug;
+    }
+
+    /**
+     * Add IsshPost
+     *
+     * @param Issh\MainBundle\Entity\IsshPost $isshPost
+     */
+    public function addIsshPost(\Issh\MainBundle\Entity\IsshPost $isshPost)
+    {
+        $this->IsshPost[] = $isshPost;
+    }
+
+    /**
+     * Get IsshPost
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getIsshPost()
+    {
+        return $this->IsshPost;
     }
 }
