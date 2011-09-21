@@ -3,6 +3,7 @@
 namespace Issh\MainBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Issh\MainBundle\Entity\IsshPost
