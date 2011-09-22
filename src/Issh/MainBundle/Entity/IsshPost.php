@@ -9,11 +9,12 @@ use Doctrine\Common\Collections\ArrayCollection;
  * @ORM\Entity
  * @ORM\Table(name="IsshPost")
  * @ORM\HasLifecycleCallbacks
+ * @ORM\Entity(repositoryClass="Issh\MainBundle\Repository\PostRepository")
  */
 class IsshPost
 {
     /**
-     * @ORM\Id
+     * @ORM\id
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
      */

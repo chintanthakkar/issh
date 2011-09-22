@@ -14,7 +14,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 class IsshUser implements UserInterface
 {
     /**
-     * @ORM\Id
+     * @ORM\id
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
      */

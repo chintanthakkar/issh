@@ -13,7 +13,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 class IsshComment
 {
     /**
-     * @ORM\Id
+     * @ORM\id
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
      */
