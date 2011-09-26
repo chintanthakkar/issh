@@ -8,8 +8,8 @@ security:
             entity: { class: Issh\MainBundle\Entity\IsshUser, property: userName }
     encoders:
         Issh\MainBundle\Entity\IsshUser: 
-            algorithm: sha256
-            iterations: 1
+            algorithm: sha512
+            iterations: 10
             encode_as_base64: true
  
     firewalls:
@@ -31,5 +31,6 @@ security:
 
     access_control:
         - { path: ^/admin, roles: ROLE_ADMIN }
+        - { path: /.*, role: IS_AUTHENTICATED_ANONYMOUSLY }
         #- { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: https }
         #- { path: ^/_internal, roles: IS_AUTHENTICATED_ANONYMOUSLY, ip: 127.0.0.1 }

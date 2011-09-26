@@ -9,7 +9,7 @@ use Doctrine\Common\Collections\ArrayCollection;
  * @ORM\Entity
  * @ORM\Table(name="IsshPost")
  * @ORM\HasLifecycleCallbacks
- * @ORM\Entity(repositoryClass="Issh\MainBundle\Repository\PostRepository")
+ * @ORM\Entity(repositoryClass="Issh\MainBundle\Repository\IsshPostRepository")
  */
 class IsshPost
 {

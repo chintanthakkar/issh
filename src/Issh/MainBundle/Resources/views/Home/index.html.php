@@ -1,3 +1,4 @@
 <?php $view->extend('IsshMainBundle::layout.html.php') ?>
 
-<b>Stuff goes here!</b>
+
+<?php echo $view->render('IsshMainBundle:Home:IsshPost.html.php', array('posts'=>$posts));?>

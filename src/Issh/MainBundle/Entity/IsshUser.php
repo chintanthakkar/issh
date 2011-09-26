@@ -137,7 +137,7 @@ class IsshUser implements UserInterface
         // Create a 256 bit (64 characters) long random salt
         // Let's add 'something random' and the username
         // to the salt as well for added security
-        $this->salt = hash('sha256', uniqid(mt_rand(), true) . 'You Shall Be Slapped!' . strtolower($this->userName));
+        $this->salt = hash('sha512', uniqid(mt_rand(), true) . 'You Shall Be Slapped!' . strtolower($this->userName));
     }
 
     /**
