@@ -77,12 +77,13 @@ class HomeController extends Controller
 
                 return $this->redirect($this->generateUrl('home'));
             }
+            
+            // this might need to change in case of validation errors! - CT
             return $this->render('IsshMainBundle:Home:IsshComment.html.php', array(
                  'form'  =>  $form->createView()));   
         }
         else
         {
-            ////////might need to pass $post here -CT /////////
             $em = $this->getDoctrine()->getEntityManager();
             $comments = $em->getRepository('IsshMainBundle:IsshComment')->getLatestComments(5,$postID);
             return $this->render('IsshMainBundle:Home:IsshComment.html.php', array(
