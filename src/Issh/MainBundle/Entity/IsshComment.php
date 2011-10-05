@@ -9,6 +9,7 @@ use Doctrine\Common\Collections\ArrayCollection;
  * @ORM\Entity
  * @ORM\Table(name="IsshComment")
  * @ORM\HasLifecycleCallbacks
+ * @ORM\Entity(repositoryClass="Issh\MainBundle\Repository\IsshCommentRepository")
  */
 class IsshComment
 {
@@ -36,13 +37,13 @@ class IsshComment
     
      /**
      * @ORM\ManyToOne(targetEntity="IsshPost", inversedBy="IsshComment")
-     * @ORM\JoinColumn(name="postId", referencedColumnName="id")
+     * @ORM\JoinColumn(name="postId", referencedColumnName="id", nullable=false)        
      */
     protected $IsshPost;
 
     /**
      * @ORM\ManyToOne(targetEntity="IsshUser", inversedBy="IsshComment")
-     * @ORM\JoinColumn(name="userId", referencedColumnName="id")
+     * @ORM\JoinColumn(name="userId", referencedColumnName="id", nullable=false)   
      */
     protected $IsshUser;
     

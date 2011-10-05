@@ -45,7 +45,7 @@ class IsshPost
         
     /**
      * @ORM\ManyToOne(targetEntity="IsshUser", inversedBy="IsshPost")
-     * @ORM\JoinColumn(name="userId", referencedColumnName="id")
+     * @ORM\JoinColumn(name="userId", referencedColumnName="id", nullable=false) 
      */
     protected $IsshUser;
 
@@ -239,4 +239,5 @@ class IsshPost
     {
         return $this->created;
     }
+    
 }

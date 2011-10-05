@@ -9,6 +9,10 @@
 <?php if(!empty($posts)): ?>
     <?php foreach ($posts as $post): ?>
     <p><?php echo $post->getText();?></p>
-    --------------------------------------
+    <?php 
+    //embed comment controller in view
+    echo $view['actions']->render('IsshMainBundle:Home:comment',array('postID' => $post->getId())); 
+    ?>
+    <br>--------------------------------------<br>
     <?php endforeach; ?>
 <?php endif; ?>

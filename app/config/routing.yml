@@ -9,7 +9,10 @@ register:
     defaults:  { _controller: IsshMainBundle:Security:register }  
 post:
     pattern:   /post
-    defaults:  { _controller: IsshMainBundle:Home:post }      
+    defaults:  { _controller: IsshMainBundle:Home:post }  
+comment:
+    pattern:   /comment
+    defaults:  { _controller: IsshMainBundle:Home:comment }     
 login_check:
     pattern:   /login_check
 logout:

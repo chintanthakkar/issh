@@ -1,4 +1,6 @@
 <?php $view->extend('IsshMainBundle::layout.html.php') ?>
 
-
-<?php echo $view->render('IsshMainBundle:Home:IsshPost.html.php', array('posts'=>$posts));?>
+<?php 
+//embed another controller in view
+echo $view['actions']->render('IsshMainBundle:Home:post'); 
+?>
