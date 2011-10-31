@@ -8,6 +8,8 @@ use Doctrine\Common\Collections\ArrayCollection;
 /**
  * @ORM\Entity
  * @ORM\Table(name="IsshSlaptastic")
+ * @ORM\HasLifecycleCallbacks
+ * @ORM\Entity(repositoryClass="Issh\MainBundle\Repository\IsshSlaptasticRepository")
  */
 class IsshSlaptastic
 {
@@ -16,13 +18,13 @@ class IsshSlaptastic
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    protected $id;
 
 
     /**
      * @ORM\Column(type="datetime")
      */
-    private $created;
+    protected $created;
 
      /**
      * @ORM\ManyToOne(targetEntity="IsshPost", inversedBy="IsshSlaptastic")
@@ -54,14 +56,14 @@ class IsshSlaptastic
         return $this->id;
     }
 
-    /**
-     * Set created
+   /**
+     * Invoked before the entity is updated.
      *
-     * @param datetime $created
-     */
-    public function setCreated($created)
+     * @ORM\PrePersist
+     */ 
+    public function setCreated()
     {
-        $this->created = $created;
+        $this->created = new \DateTime();
     }
 
     /**

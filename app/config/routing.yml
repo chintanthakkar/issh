@@ -12,7 +12,10 @@ post:
     defaults:  { _controller: IsshMainBundle:Home:post }  
 comment:
     pattern:   /comment
-    defaults:  { _controller: IsshMainBundle:Home:comment }     
+    defaults:  { _controller: IsshMainBundle:Home:comment }  
+slaptastic:
+    pattern:   /slaptastic
+    defaults:  { _controller: IsshMainBundle:Home:slaptastic }     
 login_check:
     pattern:   /login_check
 logout:

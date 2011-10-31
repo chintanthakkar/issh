@@ -6,8 +6,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Issh\MainBundle\Form\Post\CommentForm;
 use Issh\MainBundle\Form\Post\PostForm;
+use Issh\MainBundle\Form\Post\SlaptasticForm;
 use Issh\MainBundle\Entity\IsshPost;
 use Issh\MainBundle\Entity\IsshComment;
+use Issh\MainBundle\Entity\IsshSlaptastic;
 
 class HomeController extends Controller
 {
@@ -88,6 +90,48 @@ class HomeController extends Controller
             $comments = $em->getRepository('IsshMainBundle:IsshComment')->getLatestComments(5,$postID);
             return $this->render('IsshMainBundle:Home:IsshComment.html.php', array(
                 'form'  =>  $form->createView(), 'comments' => $comments));           
+        }     
+    }
+    
+    
+    public function slaptasticAction($postID = null)
+    {
+        $em = $this->get('doctrine')->getEntityManager();
+        $request = $this->get('request');
+
+        $slaptastic = new IsshSlaptastic(); 
+
+        if($postID == null)
+        {
+            $data = $request->get('SlaptasticForm');
+            $postID = $data['IsshPost'];
+//            var_dump($postID);die();
+        }
+        
+        $IsshPost = $this->getDoctrine()->getRepository('IsshMainBundle:IsshPost')->find($postID);
+        $form = $this->createForm(new SlaptasticForm($IsshPost), $slaptastic); 
+        
+        if ('POST' == $request->getMethod()) 
+        {   
+            $slaptastic->setIsshPost($IsshPost);
+            $form->bindRequest($request);           
+            $slaptastic->setIsshUser($this->get('security.context')->getToken()->getUser());  
+            if ($form->isValid()) {
+                $em->persist($slaptastic);
+                $em->flush();
+
+                return $this->redirect($this->generateUrl('home'));
+            }
+            
+            return $this->render('IsshMainBundle:Home:IsshSlaptastic.html.php', array(
+                 'form'  =>  $form->createView()));   
+        }
+        else
+        {
+            $em = $this->getDoctrine()->getEntityManager();
+            $numSlaptastics = $em->getRepository('IsshMainBundle:IsshSlaptastic')->getNumSlaptastics($postID);
+            return $this->render('IsshMainBundle:Home:IsshSlaptastic.html.php', array(
+                'form'  =>  $form->createView(), 'numSlaptastics' => $numSlaptastics));           
         }     
     }
     

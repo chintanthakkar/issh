@@ -10,6 +10,7 @@
         </title>
         <link rel="stylesheet" type="text/css" href="<?php echo $view['assets']->getUrl('css/style.css') ?>" media="screen" />
         <link rel="shortcut icon" href="<?php echo $view['assets']->getUrl('favico.ico') ?>" />
+        <script type="text/javascript" src="<?php echo $view['assets']->getUrl('js/jquery-1.6.4.min.js') ?>"></script>
     </head>
     <body>
         <div id="header-wrap">
