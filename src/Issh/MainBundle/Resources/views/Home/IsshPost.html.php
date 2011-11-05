@@ -13,7 +13,7 @@
     //embed comment controller in view
     echo $view['actions']->render('IsshMainBundle:Home:comment',array('postID' => $post->getId()));
     echo $view['actions']->render('IsshMainBundle:Home:slaptastic',array('postID' => $post->getId()));
-//    echo $view['actions']->render('IsshMainBundle:Home:stinger',array('postID' => $post->getId()));
+    echo $view['actions']->render('IsshMainBundle:Home:stinger',array('postID' => $post->getId()));
     ?>
     <br>--------------------------------------<br>
     <?php endforeach; ?>

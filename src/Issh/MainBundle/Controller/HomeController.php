@@ -7,9 +7,11 @@ use Symfony\Component\HttpFoundation\Response;
 use Issh\MainBundle\Form\Post\CommentForm;
 use Issh\MainBundle\Form\Post\PostForm;
 use Issh\MainBundle\Form\Post\SlaptasticForm;
+use Issh\MainBundle\Form\Post\StingerForm;
 use Issh\MainBundle\Entity\IsshPost;
 use Issh\MainBundle\Entity\IsshComment;
 use Issh\MainBundle\Entity\IsshSlaptastic;
+use Issh\MainBundle\Entity\IsshStinger;
 
 class HomeController extends Controller
 {
@@ -134,5 +136,45 @@ class HomeController extends Controller
                 'form'  =>  $form->createView(), 'numSlaptastics' => $numSlaptastics));           
         }     
     }
+    
+    public function stingerAction($postID = null)
+    {
+        $em = $this->get('doctrine')->getEntityManager();
+        $request = $this->get('request');
+
+        $stinger = new IsshStinger(); 
+
+        if($postID == null)
+        {
+            $data = $request->get('StingerForm');
+            $postID = $data['IsshPost'];
+        }
+        
+        $IsshPost = $this->getDoctrine()->getRepository('IsshMainBundle:IsshPost')->find($postID);
+        $form = $this->createForm(new StingerForm($IsshPost), $stinger); 
+        
+        if ('POST' == $request->getMethod()) 
+        {   
+            $stinger->setIsshPost($IsshPost);
+            $form->bindRequest($request);           
+            $stinger->setIsshUser($this->get('security.context')->getToken()->getUser());  
+            if ($form->isValid()) {
+                $em->persist($stinger);
+                $em->flush();
+
+                return $this->redirect($this->generateUrl('home'));
+            }
+            
+            return $this->render('IsshMainBundle:Home:IsshStinger.html.php', array(
+                 'form'  =>  $form->createView()));   
+        }
+        else
+        {
+            $em = $this->getDoctrine()->getEntityManager();
+            $numStingers = $em->getRepository('IsshMainBundle:IsshStinger')->getNumStingers($postID);
+            return $this->render('IsshMainBundle:Home:IsshStinger.html.php', array(
+                'form'  =>  $form->createView(), 'numStingers' => $numStingers));           
+        }     
+    }    
     
 }

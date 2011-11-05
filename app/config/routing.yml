@@ -16,6 +16,9 @@ comment:
 slaptastic:
     pattern:   /slaptastic
     defaults:  { _controller: IsshMainBundle:Home:slaptastic }     
+stinger:
+    pattern:   /stinger
+    defaults:  { _controller: IsshMainBundle:Home:stinger }     
 login_check:
     pattern:   /login_check
 logout:
